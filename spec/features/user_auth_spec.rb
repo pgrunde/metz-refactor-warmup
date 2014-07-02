@@ -52,4 +52,30 @@ feature 'User login' do
     expect(page).to_not have_content('Welcome to the Game of TenThousand')
   end
 
+  scenario 'User cannot login with unregistered email' do
+    visit '/'
+    click_on 'Log in'
+    fill_in 'Email', :with => 'albert@example.com'
+    fill_in 'Password', :with => 'thebighouse'
+    click_on 'Log in'
+    expect(page).to have_content('Email and/or Password is invalid')
+  end
+
+  scenario 'User cannot login with incorrect password' do
+    email = 'albert@example.com'
+    visit '/'
+    click_on 'Register'
+    fill_in 'Username', :with => 'Albert'
+    fill_in 'Email', :with => email
+    fill_in 'Password', :with => 'thebighouse'
+    fill_in 'Password confirmation', :with => 'thebighouse'
+    click_on 'Register'
+    click_on 'Log out'
+    click_on 'Log in'
+    fill_in 'Email', :with => email
+    fill_in 'Password', :with => 'password'
+    click_on 'Log in'
+    expect(page).to have_content('Email and/or Password is invalid')
+  end
+
 end
