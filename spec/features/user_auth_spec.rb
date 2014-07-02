@@ -33,4 +33,23 @@ feature 'User login' do
     expect(page).to have_content('Register')
   end
 
+  scenario 'User can log in' do
+    email = 'albert@example.com'
+    password = 'thebighouse'
+    visit '/'
+    click_on 'Register'
+    fill_in 'Username', :with => 'Albert'
+    fill_in 'Email', :with => email
+    fill_in 'Password', :with => password
+    fill_in 'Password confirmation', :with => password
+    click_on 'Register'
+    click_on 'Log out'
+    click_on 'Log in'
+    fill_in 'Email', :with => email
+    fill_in 'Password', :with => password
+    click_on 'Log in'
+    expect(page).to have_content('Albert, welcome to your Game of TenThousand')
+    expect(page).to_not have_content('Welcome to the Game of TenThousand')
+  end
+
 end
