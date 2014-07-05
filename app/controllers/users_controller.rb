@@ -10,6 +10,7 @@ class UsersController < ApplicationController
       session[:current_user_id] = @user.id
       redirect_to root_path
     else
+      flash.now[:error] = 'Are you having deja vu? We are. Did you forget your password?'
       render :new
     end
   end

@@ -78,4 +78,23 @@ feature 'User login' do
     expect(page).to have_content('Email and/or Password is invalid')
   end
 
+  scenario 'User cannot login with already registered email address' do
+    email = 'albert@example.com'
+    visit '/'
+    click_on 'Register'
+    fill_in 'Username', :with => 'Albert'
+    fill_in 'Email', :with => email
+    fill_in 'Password', :with => 'thebighouse'
+    fill_in 'Password confirmation', :with => 'thebighouse'
+    click_on 'Register'
+    click_on 'Log out'
+    click_on 'Register'
+    fill_in 'Username', :with => 'Alberto'
+    fill_in 'Email', :with => email
+    fill_in 'Password', :with => 'password'
+    fill_in 'Password confirmation', :with => 'password'
+    click_on 'Register'
+    expect(page).to have_content('Are you having deja vu? We are. Did you forget your password?')
+  end
+
 end
