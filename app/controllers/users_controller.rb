@@ -10,7 +10,8 @@ class UsersController < ApplicationController
       session[:current_user_id] = @user.id
       redirect_to root_path
     else
-      flash.now[:error] = 'Are you having deja vu? We are. Did you forget your password?'
+      flash.now[:error] = 'Are you having deja vu? We are. Did you forget your password?' if User.find_by_email(params[:user][:email])
+      flash.now[:error] = 'Oops, your password and password confirmation don\'t match' if params[:user][:password] != params[:user][:password_confirmation]
       render :new
     end
   end

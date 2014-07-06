@@ -97,4 +97,15 @@ feature 'User login' do
     expect(page).to have_content('Are you having deja vu? We are. Did you forget your password?')
   end
 
+  scenario 'User must enter matching password and password confirmation' do
+    visit '/'
+    click_on 'Register'
+    fill_in 'Username', :with => 'Albert'
+    fill_in 'Email', :with => 'albert@example.com'
+    fill_in 'Password', :with => 'thebighouse'
+    fill_in 'Password confirmation', :with => 'not the big house'
+    click_on 'Register'
+    expect(page).to have_content('Oops, your password and password confirmation don\'t match')
+  end
+
 end
