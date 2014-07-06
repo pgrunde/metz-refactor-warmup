@@ -8,12 +8,18 @@
 </head>
 <body>
 
-<% if flash %>
+<% if !flash.empty? %>
 <div id="welcomebox">
   <% flash.each do |name, msg| %>
     <%= content_tag :div, msg, class: name %>
   <% end %>
 </div>
+<% end %>
+
+<% if @_current_user %>
+  <nav class="right_align"><%= link_to 'Log out', login_path(@_current_user), :method => :delete %></nav>
+<% else %>
+  <nav class="right_align"><%= link_to 'Log in', new_login_path %> <%= link_to 'Register', new_user_path %></nav>
 <% end %>
 
 <%= yield %>

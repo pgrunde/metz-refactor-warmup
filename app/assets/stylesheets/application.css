@@ -22,6 +22,22 @@ html {
     background-color: rgba(242, 232, 223, 0.75);
 }
 
+nav {
+    background-color: #3F1703;
+    width: 100%;
+    font-family: 'IM Fell DW Pica SC', 'Helvetica', Helvetica, sans-serif;
+    font-size: 2em;
+}
+
+nav a {
+    color: #fed992;
+
+}
+
+nav a:hover {
+    color: #dd6600;
+}
+
 #wrapper {
     position: fixed;
     width: 100%;
@@ -31,7 +47,7 @@ html {
     color: black;
     font-family: 'IM Fell DW Pica SC', 'Helvetica', Helvetica, sans-serif;
     font-size: 2em;
-    width: 100%;
+    width: auto;
     background-color: rgba(242, 232, 223, 0.75);
     padding: 10px;
     border: none;
