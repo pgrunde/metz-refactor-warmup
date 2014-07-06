@@ -2,14 +2,18 @@
 <html>
 <head>
   <title>TenThousand</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
 
-<% flash.each do |name, msg| %>
-  <%= content_tag :div, msg, class: name %>
+<% if flash %>
+<div id="welcomebox">
+  <% flash.each do |name, msg| %>
+    <%= content_tag :div, msg, class: name %>
+  <% end %>
+</div>
 <% end %>
 
 <%= yield %>

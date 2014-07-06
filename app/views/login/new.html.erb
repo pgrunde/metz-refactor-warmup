@@ -1,10 +1,20 @@
-<%= form_for @user, {url: '/login', :method => 'post'} do |f| %>
-
-  <%= f.label :email %>
-  <%= f.text_field :email %>
-
-  <%= f.label :password %>
-  <%= f.password_field :password %>
-
-  <%= f.submit 'Log in' %>
-<% end %>
+<div id="wrapper">
+  <div id="welcomebox">
+    <table class="center_align">
+      <%= form_for @user, {url: '/login', :method => 'post'} do |f| %>
+        <tr>
+          <td class="right_align"><%= f.label :email %></td>
+          <td><%= f.text_field :email %></td>
+        </tr>
+        <tr>
+          <td class="right_align"><%= f.label :password %></td>
+          <td><%= f.password_field :password %></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td class="left_align">  <%= f.submit 'Log in' %></td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
+</div>

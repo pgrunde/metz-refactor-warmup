@@ -13,3 +13,52 @@
  *= require_tree .
  *= require_self
  */
+@import url(http://fonts.googleapis.com/css?family=IM+Fell+DW+Pica+SC);
+
+html {
+    background: url('http://upload.wikimedia.org/wikipedia/commons/5/59/Five_ivory_dice.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-color: rgba(242, 232, 223, 0.75);
+}
+
+#wrapper {
+    position: fixed;
+    width: 100%;
+}
+
+#welcomebox {
+    color: black;
+    font-family: 'IM Fell DW Pica SC', 'Helvetica', Helvetica, sans-serif;
+    font-size: 2em;
+    width: 100%;
+    background-color: rgba(242, 232, 223, 0.75);
+    padding: 10px;
+    border: none;
+    text-align: center;
+}
+
+a {
+    color: #dd6600;
+}
+
+a:hover {
+    color: #551100
+}
+
+.left_align {
+    text-align: left;
+}
+
+.center_align {
+    margin: 0 auto 0 auto;
+}
+
+.right_align {
+    text-align: right;
+    padding-right: 0.25em;
+}
+
+.error {
+    color: darkred;
+}
