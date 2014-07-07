@@ -1,5 +1,6 @@
 <% if @user %>
   <h1><%= @user.username %>, welcome to your Game of TenThousand</h1>
+  <%= link_to 'New Game', new_game_path %>
 <% else %>
   <h1>Welcome to the Game of TenThousand</h1>
 <% end %>
