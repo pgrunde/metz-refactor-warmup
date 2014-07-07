@@ -17,4 +17,18 @@ feature 'User can play one hand of Ten Thousand' do
     expect(page).to have_content('Available Dice: 6')
   end
 
+  scenario 'User can roll all available dice' do
+    visit '/'
+    click_link 'Register'
+    fill_in 'Username', :with => 'Albert'
+    fill_in 'Email', :with => 'albert@example.com'
+    fill_in 'Password', :with => 'thebighouse'
+    fill_in 'Password confirmation', :with => 'thebighouse'
+    click_button 'Register'
+    click_link 'New Game'
+    click_link 'Let\'s Play!'
+    click_link 'Roll'
+    expect(page).to have_content('You rolled:')
+  end
+
 end

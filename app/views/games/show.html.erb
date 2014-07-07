@@ -2,6 +2,13 @@
   <div class="right_align">
     <h4>Total Score: 0</h4>
     <h4>Current Score: 0</h4>
-    <h4>Available Dice: 6</h4>
+    <h4>Available Dice: <%= @available_dice %></h4>
+    <h4><%= link_to 'Roll', game_path(@game) %></h4>
+  </div>
+
+  <div>
+    <h4>You rolled: <% @roll.each do |die| %>
+        <%= die %>
+        <% end %></h4>
   </div>
 </div>
