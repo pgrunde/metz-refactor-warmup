@@ -6,15 +6,31 @@ class GamesController < ApplicationController
 
   def create
     @game = Game.new
+    @game.total_score = 0
+    @game.current_score = 0
+    @game.available_dice = 6
+    @game.last_roll = roll_dice
     @game.save
     redirect_to game_path(@game)
   end
 
   def show
     @game = Game.find(params[:id])
-    @available_dice ||= 6
-    @roll = roll_dice
+  end
 
+  def update
+    @game = Game.find(params[:id])
+    score_dice = [params[:dice_0],
+             params[:dice_1],
+             params[:dice_2],
+             params[:dice_3],
+             params[:dice_4],
+             params[:dice_5],
+    ].compact
+    @game.available_dice -= score_dice.length
+    @game.current_score = 150
+    @game.save
+    redirect_to game_path
   end
 
   private
@@ -27,8 +43,7 @@ class GamesController < ApplicationController
              5 => '⚄',
              6 => '⚅',
     }
-    fixies = (1..@available_dice).map { rand(1..6) }.sort
-    fixies.map {|face| dice[face] }
+    (1..@game.available_dice).map { rand(1..6) }.sort.map {|face| [face, dice[face]] }
   end
 
 end

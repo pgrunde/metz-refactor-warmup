@@ -19,6 +19,10 @@ ActiveRecord::Schema.define(version: 20140707032635) do
   create_table "games", force: true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.text     "last_roll"
+    t.integer  "total_score"
+    t.integer  "current_score"
+    t.integer  "available_dice"
   end
 
   create_table "users", force: true do |t|

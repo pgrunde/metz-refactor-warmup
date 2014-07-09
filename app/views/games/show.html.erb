@@ -1,14 +1,18 @@
 <div class="flex_container">
   <div class="right_align">
-    <h4>Total Score: 0</h4>
-    <h4>Current Score: 0</h4>
-    <h4>Available Dice: <%= @available_dice %></h4>
-    <h4><%= link_to 'Roll', game_path(@game) %></h4>
+    <h4>Total Score: <%= @game.total_score %></h4>
+    <h4>Current Score: <%= @game.current_score %></h4>
+    <h4>Available Dice: <%= @game.available_dice %></h4>
   </div>
 
   <div>
-    <h4>You rolled: <% @roll.each do |die| %>
-        <%= die %>
-        <% end %></h4>
+    <%= form_for @game do |f| %>
+      <div class="dice_desc">You rolled:</div>
+      <% @game.last_roll.each_with_index do |die, i| %>
+        <input id="dice_<%= i %>" name="dice_<%= i %>" type="checkbox" value="<%= die[0] %>"/>
+        <label for="i"><%= die[1] %></label>
+      <% end %>
+      <%= f.submit 'Roll' %>
+    <% end %>
   </div>
 </div>
