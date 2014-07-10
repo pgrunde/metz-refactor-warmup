@@ -9,7 +9,7 @@ class GamesController < ApplicationController
     @game.total_score = 0
     @game.current_score = 0
     @game.available_dice = 6
-    @game.last_roll = roll_dice
+    @game.last_roll = @game.roll_dice
     @game.save
     redirect_to game_path(@game)
   end
@@ -26,33 +26,12 @@ class GamesController < ApplicationController
                     params[:dice_2],
                     params[:dice_3],
                     params[:dice_4],
-                    params[:dice_5],
-      ].compact
-      @game.available_dice -= score_dice.length
-      @game.current_score = 150
-      @game.last_roll = roll_dice
-      @game.save
+                    params[:dice_5],].compact
+      @game.roll(score_dice)
     elsif params[:commit] == 'Stay'
-      @game.current_score = 150
-      @game.total_score += @game.current_score
-      @game.current_score = 0
-      @game.available_dice = 6
-      @game.save
+      @game.stay
     end
     redirect_to game_path
-  end
-
-  private
-
-  def roll_dice
-    dice = { 1 => '⚀',
-             2 => '⚁',
-             3 => '⚂',
-             4 => '⚃',
-             5 => '⚄',
-             6 => '⚅',
-    }
-    (1..@game.available_dice).map { rand(1..6) }.sort.map {|face| [face, dice[face]] }
   end
 
 end
