@@ -20,16 +20,25 @@ class GamesController < ApplicationController
 
   def update
     @game = Game.find(params[:id])
-    score_dice = [params[:dice_0],
-             params[:dice_1],
-             params[:dice_2],
-             params[:dice_3],
-             params[:dice_4],
-             params[:dice_5],
-    ].compact
-    @game.available_dice -= score_dice.length
-    @game.current_score = 150
-    @game.save
+    if params[:commit] == 'Roll'
+      score_dice = [params[:dice_0],
+                    params[:dice_1],
+                    params[:dice_2],
+                    params[:dice_3],
+                    params[:dice_4],
+                    params[:dice_5],
+      ].compact
+      @game.available_dice -= score_dice.length
+      @game.current_score = 150
+      @game.last_roll = roll_dice
+      @game.save
+    elsif params[:commit] == 'Stay'
+      @game.current_score = 150
+      @game.total_score += @game.current_score
+      @game.current_score = 0
+      @game.available_dice = 6
+      @game.save
+    end
     redirect_to game_path
   end
 
