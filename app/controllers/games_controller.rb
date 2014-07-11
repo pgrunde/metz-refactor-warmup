@@ -19,21 +19,15 @@ class GamesController < ApplicationController
 
   def update
     @game = Game.find(params[:id])
-    if params[:commit] == 'Roll'
-      scoring_dice = [params[:dice_0],
+    scoring_dice = [params[:dice_0],
                     params[:dice_1],
                     params[:dice_2],
                     params[:dice_3],
                     params[:dice_4],
                     params[:dice_5],].compact
+    if params[:commit] == 'Roll'
       @game.roll_again(scoring_dice)
     elsif params[:commit] == 'Stay'
-      scoring_dice = [params[:dice_0],
-                      params[:dice_1],
-                      params[:dice_2],
-                      params[:dice_3],
-                      params[:dice_4],
-                      params[:dice_5],].compact
       @game.stay(scoring_dice)
     else
       @game.first_roll
