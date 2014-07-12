@@ -20,11 +20,11 @@ describe 'User can play Ten Thousand' do
     srand(Random.new_seed)
   end
 
-  it 'allows a user to roll and then score' do
+  it 'allows a user to roll and then score 1s and 5s' do
     srand(1)
     game = Game.new
     game.first_roll
-    game.stay([[1, "⚀"], [5, "⚄"]])
+    game.stay(['1', '5'])
     actual = game.total_score
     expected = 150
     expect(actual).to eq(expected)
