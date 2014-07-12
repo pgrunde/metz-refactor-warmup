@@ -51,4 +51,70 @@ describe 'User can play Ten Thousand' do
     srand(Random.new_seed)
   end
 
+  it 'allows a user to score for three of a kind' do
+    srand(19)
+    game = new_game_with_defaults
+    game.first_roll
+    game.stay(['3', '3', '3'])
+    actual = game.total_score
+    expected = 300
+    expect(actual).to eq(expected)
+    srand(Random.new_seed)
+  end
+
+  it 'allows a user to score for four of a kind' do
+    srand(31)
+    game = new_game_with_defaults
+    game.first_roll
+    game.stay(['3', '3', '3', '3'])
+    actual = game.total_score
+    expected = 600
+    expect(actual).to eq(expected)
+    srand(Random.new_seed)
+  end
+
+  it 'allows a user to score for five of a kind' do
+    srand(4239)
+    game = new_game_with_defaults
+    game.first_roll
+    game.stay(['3', '3', '3', '3', '3'])
+    actual = game.total_score
+    expected = 1200
+    expect(actual).to eq(expected)
+    srand(Random.new_seed)
+  end
+
+  it 'allows a user to score for six of a kind' do
+    srand(11604)
+    game = new_game_with_defaults
+    game.first_roll
+    game.stay(['3', '3', '3', '3', '3', '3'])
+    actual = game.total_score
+    expected = 2400
+    expect(actual).to eq(expected)
+    srand(Random.new_seed)
+  end
+
+  it 'allows a user to score for a straight' do
+    srand(26)
+    game = new_game_with_defaults
+    game.first_roll
+    game.stay(['1','2','3','4','5','6'])
+    actual = game.total_score
+    expected = 1500
+    expect(actual).to eq(expected)
+    srand(Random.new_seed)
+  end
+
+  it 'allows a user to score for three pair' do
+    srand(189)
+    game = new_game_with_defaults
+    game.first_roll
+    game.stay(['2','2','3','3','4','4'])
+    actual = game.total_score
+    expected = 750
+    expect(actual).to eq(expected)
+    srand(Random.new_seed)
+  end
+
 end
