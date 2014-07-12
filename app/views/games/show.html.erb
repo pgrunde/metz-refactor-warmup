@@ -10,7 +10,7 @@
       <div class="dice_desc">You rolled:</div>
       <% @game.last_roll.each_with_index do |die, i| %>
         <input id="dice_<%= i %>" name="dice_<%= i %>" type="checkbox" value="<%= die[0] %>"/>
-        <label for="i"><%= die[1] %></label>
+        <label for="dice_<%= i %>"><%= die[1] %></label>
       <% end %>
       <%= f.submit 'Roll' %>
       <%= f.submit 'Stay' %>
