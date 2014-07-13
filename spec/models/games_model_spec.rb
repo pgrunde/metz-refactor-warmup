@@ -117,4 +117,15 @@ describe 'User can play Ten Thousand' do
     srand(Random.new_seed)
   end
 
+  it 'allows a user to score for three pair but not add the extra 1s or 5s' do
+    srand(1001)
+    game = new_game_with_defaults
+    game.first_roll
+    game.stay(['1','1','5','5','6','6'])
+    actual = game.total_score
+    expected = 750
+    expect(actual).to eq(expected)
+    srand(Random.new_seed)
+  end
+
 end
