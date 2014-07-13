@@ -39,7 +39,6 @@ nav a:hover {
 }
 
 #wrapper {
-    position: fixed;
     width: 100%;
 }
 
@@ -82,4 +81,17 @@ a:hover {
 .flex_container {
     display: inline-flex;
 
+}
+
+div li {
+    list-style-type: none;
+    font-size: smaller;
+}
+
+.odd {
+    background-color: rgba(254, 217, 146, 0.3);
+}
+
+.even {
+    background-color: rgba(242, 232, 223, 0.3);
 }
