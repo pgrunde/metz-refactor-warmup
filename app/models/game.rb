@@ -25,26 +25,26 @@ class Game < ActiveRecord::Base
   end
 
   def roll_dice
-    dice = { 1 => '⚀',
-             2 => '⚁',
-             3 => '⚂',
-             4 => '⚃',
-             5 => '⚄',
-             6 => '⚅',
+    dice = {1 => '⚀',
+            2 => '⚁',
+            3 => '⚂',
+            4 => '⚃',
+            5 => '⚄',
+            6 => '⚅',
     }
-    (1..self.available_dice).map { rand(1..6) }.sort.map {|face| [face, dice[face]] }
+    (1..self.available_dice).map { rand(1..6) }.sort.map { |face| [face, dice[face]] }
   end
 
   private
 
   def score(scoring_dice)
-    straight = scoring_dice == ['1','2','3','4','5','6']
+    straight = scoring_dice == ['1', '2', '3', '4', '5', '6']
 
     three_pairs = scoring_dice[0] == scoring_dice[1] &&
       scoring_dice[2] == scoring_dice[3] &&
       scoring_dice[4] == scoring_dice[5] &&
       scoring_dice.length == 6 &&
-      !scoring_dice.all?{ |scoring_die| scoring_dice[0] == scoring_die}
+      !scoring_dice.all? { |scoring_die| scoring_dice[0] == scoring_die }
 
     three_of_a_kind =
       (scoring_dice[0..2] && scoring_dice[0..2].length == 3 && scoring_dice[1..2].all? { |scoring_die| scoring_die == scoring_dice[0] }) ||
@@ -73,7 +73,7 @@ class Game < ActiveRecord::Base
       tally_score = 750
       scoring_dice.clear
     elsif six_of_a_kind
-      kind = scoring_dice.find { |dice| scoring_dice.count(dice) == 6}
+      kind = scoring_dice.find { |dice| scoring_dice.count(dice) == 6 }
       if kind == '1'
         tally_score = 1000 * 4
       else
@@ -83,7 +83,7 @@ class Game < ActiveRecord::Base
         scoring_dice.delete(kind)
       end
     elsif five_of_a_kind
-      kind = scoring_dice.find { |dice| scoring_dice.count(dice) == 5}
+      kind = scoring_dice.find { |dice| scoring_dice.count(dice) == 5 }
       if kind == '1'
         tally_score = 1000 * 3
       else
@@ -93,7 +93,7 @@ class Game < ActiveRecord::Base
         scoring_dice.delete(kind)
       end
     elsif four_of_a_kind
-      kind = scoring_dice.find { |dice| scoring_dice.count(dice) == 4}
+      kind = scoring_dice.find { |dice| scoring_dice.count(dice) == 4 }
       if kind == '1'
         tally_score = 1000 * 2
       else
@@ -103,7 +103,7 @@ class Game < ActiveRecord::Base
         scoring_dice.delete(kind)
       end
     elsif three_of_a_kind
-      kind = scoring_dice.find{ |dice| scoring_dice.count(dice) == 3}
+      kind = scoring_dice.find { |dice| scoring_dice.count(dice) == 3 }
       if kind == '1'
         tally_score = 1000
       else
