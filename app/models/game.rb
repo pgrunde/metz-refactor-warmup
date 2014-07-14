@@ -35,8 +35,6 @@ class Game < ActiveRecord::Base
     (1..self.available_dice).map { rand(1..6) }.sort.map { |face| [face, dice[face]] }
   end
 
-  private
-
   def score(scoring_dice)
     straight = scoring_dice == ['1', '2', '3', '4', '5', '6']
 

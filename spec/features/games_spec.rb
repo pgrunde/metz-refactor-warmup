@@ -68,4 +68,30 @@ feature 'User can play one hand of Ten Thousand' do
     srand(Random.new_seed)
   end
 
+  scenario 'If user busts, current score is reset to 0, available dice reset to 6' do
+    srand(3)
+    visit '/'
+    click_link 'Register'
+    fill_in 'Username', :with => 'Albert'
+    fill_in 'Email', :with => 'albert@example.com'
+    fill_in 'Password', :with => 'thebighouse'
+    fill_in 'Password confirmation', :with => 'thebighouse'
+    click_button 'Register'
+    click_link 'New Game'
+    click_link 'Let\'s Play!'
+    expect(page).to have_content('You rolled: ⚀ ⚀ ⚀ ⚁ ⚂ ⚃')
+    check 'dice_0'
+    check 'dice_1'
+    check 'dice_2'
+    click_button 'Roll'
+    check 'dice_0'
+    click_button 'Roll'
+    expect(page).to have_content('Current Score: 0')
+    expect(page).to have_content('Available Dice: 6')
+    expect(page).to have_content('Bust!')
+    expect(page).to_not have_button('Roll')
+    expect(page).to_not have_button('Stay')
+    srand(Random.new_seed)
+  end
+
 end
