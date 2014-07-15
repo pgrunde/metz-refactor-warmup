@@ -89,7 +89,7 @@ describe 'User can play Ten Thousand' do
   it 'allows a user to score for a straight' do
     srand(26)
     game = new_game_with_defaults
-    game.stay(['1','2','3','4','5','6'])
+    game.stay(['1', '2', '3', '4', '5', '6'])
     actual = game.total_score
     expected = 1500
     expect(actual).to eq(expected)
@@ -99,7 +99,7 @@ describe 'User can play Ten Thousand' do
   it 'allows a user to score for three pair' do
     srand(189)
     game = new_game_with_defaults
-    game.stay(['2','2','3','3','4','4'])
+    game.stay(['2', '2', '3', '3', '4', '4'])
     actual = game.total_score
     expected = 750
     expect(actual).to eq(expected)
@@ -109,7 +109,7 @@ describe 'User can play Ten Thousand' do
   it 'allows a user to score for three pair but not add the extra 1s or 5s' do
     srand(1001)
     game = new_game_with_defaults
-    game.stay(['1','1','5','5','6','6'])
+    game.stay(['1', '1', '5', '5', '6', '6'])
     actual = game.total_score
     expected = 750
     expect(actual).to eq(expected)

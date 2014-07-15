@@ -12,7 +12,7 @@ class GamesController < ApplicationController
 
   def show
     @game = Game.find(params[:id])
-    if @game.score(@game.last_roll.map{|die| "#{die[0]}"}) == 0
+    if @game.score(@game.last_roll.map { |die| "#{die[0]}" }) == 0
       @bust = true
       @game.current_score = 0
       @game.available_dice = 6
@@ -32,7 +32,7 @@ class GamesController < ApplicationController
     elsif params[:commit] == 'Stay'
       @game.stay(scoring_dice)
     elsif params[:commit] == 'New play'
-      @game.roll_again(@game.last_roll.map{|die| "#{die[0]}"})
+      @game.roll_again(@game.last_roll.map { |die| "#{die[0]}" })
       @game.current_score = 0
       @game.save
     end
