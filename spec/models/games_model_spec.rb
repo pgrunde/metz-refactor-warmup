@@ -5,7 +5,6 @@ describe 'User can play Ten Thousand' do
   def new_game_with_defaults
     game = Game.new
     game.new_with_defaults
-    game.last_roll = game.first_roll
     game
   end
 
@@ -20,9 +19,8 @@ describe 'User can play Ten Thousand' do
   it 'allows a user to roll, tracks last roll' do
     srand(1)
     game = new_game_with_defaults
-    game.first_roll
     actual = game.last_roll
-    expected = [[2, "⚁"], [3, "⚂"], [3, "⚂"], [5, "⚄"], [5, "⚄"], [6, "⚅"]]
+    expected = [[1, "⚀"], [2, "⚁"], [4, "⚃"], [4, "⚃"], [5, "⚄"], [6, "⚅"]]
     expect(actual).to eq(expected)
     srand(Random.new_seed)
   end
@@ -40,7 +38,6 @@ describe 'User can play Ten Thousand' do
   it 'allows a user to roll multiple times and then score 1s and 5s' do
     srand(1)
     game = new_game_with_defaults
-    game.first_roll
     game.roll_again(['1', '1', '5'])
     game.stay(['5', '5'])
     actual = game.total_score
@@ -52,7 +49,6 @@ describe 'User can play Ten Thousand' do
   it 'allows a user to score for three of a kind' do
     srand(19)
     game = new_game_with_defaults
-    game.first_roll
     game.stay(['3', '3', '3'])
     actual = game.total_score
     expected = 300
@@ -63,7 +59,6 @@ describe 'User can play Ten Thousand' do
   it 'allows a user to score for four of a kind' do
     srand(31)
     game = new_game_with_defaults
-    game.first_roll
     game.stay(['3', '3', '3', '3'])
     actual = game.total_score
     expected = 600
@@ -74,7 +69,6 @@ describe 'User can play Ten Thousand' do
   it 'allows a user to score for five of a kind' do
     srand(4239)
     game = new_game_with_defaults
-    game.first_roll
     game.stay(['3', '3', '3', '3', '3'])
     actual = game.total_score
     expected = 1200
@@ -85,7 +79,6 @@ describe 'User can play Ten Thousand' do
   it 'allows a user to score for six of a kind' do
     srand(11604)
     game = new_game_with_defaults
-    game.first_roll
     game.stay(['3', '3', '3', '3', '3', '3'])
     actual = game.total_score
     expected = 2400
@@ -96,7 +89,6 @@ describe 'User can play Ten Thousand' do
   it 'allows a user to score for a straight' do
     srand(26)
     game = new_game_with_defaults
-    game.first_roll
     game.stay(['1','2','3','4','5','6'])
     actual = game.total_score
     expected = 1500
@@ -107,7 +99,6 @@ describe 'User can play Ten Thousand' do
   it 'allows a user to score for three pair' do
     srand(189)
     game = new_game_with_defaults
-    game.first_roll
     game.stay(['2','2','3','3','4','4'])
     actual = game.total_score
     expected = 750
@@ -118,7 +109,6 @@ describe 'User can play Ten Thousand' do
   it 'allows a user to score for three pair but not add the extra 1s or 5s' do
     srand(1001)
     game = new_game_with_defaults
-    game.first_roll
     game.stay(['1','1','5','5','6','6'])
     actual = game.total_score
     expected = 750

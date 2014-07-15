@@ -35,8 +35,6 @@ class GamesController < ApplicationController
       @game.roll_again(@game.last_roll.map{|die| "#{die[0]}"})
       @game.current_score = 0
       @game.save
-    else
-      @game.first_roll
     end
     redirect_to game_path
   end

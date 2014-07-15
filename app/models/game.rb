@@ -5,12 +5,8 @@ class Game < ActiveRecord::Base
     self.total_score = 0
     self.current_score = 0
     self.available_dice = 6
-    self.last_roll = first_roll
-    self.save
-  end
-
-  def first_roll
     self.last_roll = roll_dice
+    self.save
   end
 
   def roll_again(scoring_dice)
