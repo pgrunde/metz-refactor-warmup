@@ -31,6 +31,7 @@ nav {
 
 nav a {
     color: #fed992;
+    margin-right: .25em;
 
 }
 
@@ -86,6 +87,7 @@ a:hover {
 div li {
     list-style-type: none;
     font-size: smaller;
+    margin: 0 1.3em 0 0;
 }
 
 .odd {
