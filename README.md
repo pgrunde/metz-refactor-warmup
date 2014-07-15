@@ -18,3 +18,6 @@
 * Player can play game with local (same computer) players
 * player can play game with remote players
 * player can have multiple games going on, are listed on welcome page
+
+##### Where the heck did those awesome dice come from?
+* http://www.unicode.org/charts/PDF/U2600.pdf
