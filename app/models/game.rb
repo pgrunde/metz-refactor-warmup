@@ -1,8 +1,15 @@
 class Game < ActiveRecord::Base
   serialize :last_roll, Array
 
-  def first_roll
+  def new_with_defaults
+    self.total_score = 0
+    self.current_score = 0
     self.available_dice = 6
+    self.last_roll = first_roll
+    self.save
+  end
+
+  def first_roll
     self.last_roll = roll_dice
   end
 

@@ -6,10 +6,7 @@ class GamesController < ApplicationController
 
   def create
     @game = Game.new
-    @game.total_score = 0
-    @game.current_score = 0
-    @game.last_roll = @game.first_roll
-    @game.save
+    @game.new_with_defaults
     redirect_to game_path(@game)
   end
 

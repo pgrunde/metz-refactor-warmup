@@ -4,8 +4,7 @@ describe 'User can play Ten Thousand' do
 
   def new_game_with_defaults
     game = Game.new
-    game.total_score = 0
-    game.current_score = 0
+    game.new_with_defaults
     game.last_roll = game.first_roll
     game
   end
@@ -20,18 +19,17 @@ describe 'User can play Ten Thousand' do
 
   it 'allows a user to roll, tracks last roll' do
     srand(1)
-    game = Game.new
+    game = new_game_with_defaults
     game.first_roll
     actual = game.last_roll
-    expected = [[1, "⚀"], [2, "⚁"], [4, "⚃"], [4, "⚃"], [5, "⚄"], [6, "⚅"]]
+    expected = [[2, "⚁"], [3, "⚂"], [3, "⚂"], [5, "⚄"], [5, "⚄"], [6, "⚅"]]
     expect(actual).to eq(expected)
     srand(Random.new_seed)
   end
 
   it 'allows a user to roll and then score 1s and 5s' do
     srand(1)
-    game = Game.new
-    game.first_roll
+    game = new_game_with_defaults
     game.stay(['1', '5'])
     actual = game.total_score
     expected = 150
