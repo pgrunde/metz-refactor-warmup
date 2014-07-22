@@ -11,7 +11,7 @@ feature 'User can play one hand of Ten Thousand' do
     fill_in 'Password confirmation', :with => 'thebighouse'
     click_button 'Register'
     click_link 'New Game'
-    click_link 'Let\'s Play!'
+    click_link "Let's Play!"
     expect(page).to have_content('Total Score: 0')
     expect(page).to have_content('Current Score: 0')
     expect(page).to have_content('Available Dice: 6')
@@ -26,7 +26,7 @@ feature 'User can play one hand of Ten Thousand' do
     fill_in 'Password confirmation', :with => 'thebighouse'
     click_button 'Register'
     click_link 'New Game'
-    click_link 'Let\'s Play!'
+    click_link "Let's Play!"
     expect(page).to have_content('You rolled:')
   end
 
@@ -40,7 +40,7 @@ feature 'User can play one hand of Ten Thousand' do
     fill_in 'Password confirmation', :with => 'thebighouse'
     click_button 'Register'
     click_link 'New Game'
-    click_link 'Let\'s Play!'
+    click_link "Let's Play!"
     expect(page).to have_content('You rolled: ⚀ ⚁ ⚃ ⚃ ⚄ ⚅')
     check 'dice_0'
     check 'dice_4'
@@ -59,7 +59,7 @@ feature 'User can play one hand of Ten Thousand' do
     fill_in 'Password confirmation', :with => 'thebighouse'
     click_button 'Register'
     click_link 'New Game'
-    click_link 'Let\'s Play!'
+    click_link "Let's Play!"
     expect(page).to have_content('You rolled: ⚀ ⚁ ⚃ ⚃ ⚄ ⚅')
     check 'dice_0'
     check 'dice_4'
@@ -78,7 +78,7 @@ feature 'User can play one hand of Ten Thousand' do
     fill_in 'Password confirmation', :with => 'thebighouse'
     click_button 'Register'
     click_link 'New Game'
-    click_link 'Let\'s Play!'
+    click_link "Let's Play!"
     expect(page).to have_content('You rolled: ⚀ ⚀ ⚀ ⚁ ⚂ ⚃')
     check 'dice_0'
     check 'dice_1'
