@@ -3,64 +3,50 @@ require 'spec_helper'
 feature 'User can play one hand of Ten Thousand' do
 
   before do
+    srand(3)
     create_user
     login_user
+    visit '/'
+    click_link 'New Game'
+    click_link "Let's Play!"
   end
 
   after do
     srand(Random.new_seed)
   end
 
-  scenario 'User can start a new game' do
-    visit '/'
-    click_link 'New Game'
-    click_link "Let's Play!"
+  scenario 'New game has defaults of total and current score 0, available dice 6' do
     expect(page).to have_content('Total Score: 0')
     expect(page).to have_content('Current Score: 0')
     expect(page).to have_content('Available Dice: 6')
   end
 
-  scenario 'User can roll all available dice' do
-    visit '/'
-    click_link 'New Game'
-    click_link "Let's Play!"
-    expect(page).to have_content('You rolled:')
-  end
-
   scenario 'User can choose dice to keep' do
-    srand(1)
-    visit '/'
-    click_link 'New Game'
-    click_link "Let's Play!"
-    expect(page).to have_content('You rolled: ⚀ ⚁ ⚃ ⚃ ⚄ ⚅')
-    check 'dice_0'
-    check 'dice_4'
-    click_button 'Roll'
-    expect(page).to have_content('Current Score: 150')
-  end
-
-  scenario 'User can stop rolling and take score' do
-    srand(1)
-    visit '/'
-    click_link 'New Game'
-    click_link "Let's Play!"
-    expect(page).to have_content('You rolled: ⚀ ⚁ ⚃ ⚃ ⚄ ⚅')
-    check 'dice_0'
-    check 'dice_4'
-    click_button 'Stay'
-    expect(page).to have_content('Total Score: 150')
-  end
-
-  scenario 'If user busts, current score=0, available dice=6, user can play again' do
-    srand(3)
-    visit '/'
-    click_link 'New Game'
-    click_link "Let's Play!"
     expect(page).to have_content('You rolled: ⚀ ⚀ ⚀ ⚁ ⚂ ⚃')
     check 'dice_0'
     check 'dice_1'
     check 'dice_2'
     click_button 'Roll'
+    expect(page).to have_content('Current Score: 1000')
+  end
+
+  scenario 'User can stop rolling and take score' do
+    expect(page).to have_content('You rolled: ⚀ ⚀ ⚀ ⚁ ⚂ ⚃')
+    check 'dice_0'
+    check 'dice_1'
+    check 'dice_2'
+    click_button 'Stay'
+    expect(page).to have_content('Total Score: 1000')
+  end
+
+  scenario 'If user busts, current score=0, available dice=6, user can play again' do
+    expect(page).to have_content('You rolled: ⚀ ⚀ ⚀ ⚁ ⚂ ⚃')
+    check 'dice_0'
+    check 'dice_1'
+    check 'dice_2'
+    click_button 'Roll'
+    expect(page).to have_content('Current Score: 1000')
+    expect(page).to have_content('Available Dice: 3')
     check 'dice_0'
     click_button 'Roll'
     expect(page).to have_content('Current Score: 0')
@@ -68,11 +54,6 @@ feature 'User can play one hand of Ten Thousand' do
     expect(page).to have_content('Bust!')
     expect(page).to_not have_button('Roll')
     expect(page).to_not have_button('Stay')
-    expect(page).to have_button('New play')
-    click_button 'New play'
-    expect(page).to have_content('Current Score: 0')
-    expect(page).to have_content('Available Dice: 6')
-    expect(page).to have_content('You rolled: ⚀ ⚁ ⚁ ⚂ ⚃ ⚅')
   end
 
 end
