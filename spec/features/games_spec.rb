@@ -2,6 +2,10 @@ require 'spec_helper'
 
 feature 'User can play one hand of Ten Thousand' do
 
+  after do
+    srand(Random.new_seed)
+  end
+
   scenario 'User can start a new game' do
     visit '/'
     click_link 'Register'
@@ -46,7 +50,6 @@ feature 'User can play one hand of Ten Thousand' do
     check 'dice_4'
     click_button 'Roll'
     expect(page).to have_content('Current Score: 150')
-    srand(Random.new_seed)
   end
 
   scenario 'User can stop rolling and take score' do
@@ -65,7 +68,6 @@ feature 'User can play one hand of Ten Thousand' do
     check 'dice_4'
     click_button 'Stay'
     expect(page).to have_content('Total Score: 150')
-    srand(Random.new_seed)
   end
 
   scenario 'If user busts, current score=0, available dice=6, user can play again' do
@@ -96,7 +98,6 @@ feature 'User can play one hand of Ten Thousand' do
     expect(page).to have_content('Current Score: 0')
     expect(page).to have_content('Available Dice: 6')
     expect(page).to have_content('You rolled: ⚀ ⚁ ⚁ ⚂ ⚃ ⚅')
-    srand(Random.new_seed)
   end
 
 end
