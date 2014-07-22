@@ -2,18 +2,17 @@ require 'spec_helper'
 
 feature 'User can play one hand of Ten Thousand' do
 
+  before do
+    create_user
+    login_user
+  end
+
   after do
     srand(Random.new_seed)
   end
 
   scenario 'User can start a new game' do
     visit '/'
-    click_link 'Register'
-    fill_in 'Username', :with => 'Albert'
-    fill_in 'Email', :with => 'albert@example.com'
-    fill_in 'Password', :with => 'thebighouse'
-    fill_in 'Password confirmation', :with => 'thebighouse'
-    click_button 'Register'
     click_link 'New Game'
     click_link "Let's Play!"
     expect(page).to have_content('Total Score: 0')
@@ -23,12 +22,6 @@ feature 'User can play one hand of Ten Thousand' do
 
   scenario 'User can roll all available dice' do
     visit '/'
-    click_link 'Register'
-    fill_in 'Username', :with => 'Albert'
-    fill_in 'Email', :with => 'albert@example.com'
-    fill_in 'Password', :with => 'thebighouse'
-    fill_in 'Password confirmation', :with => 'thebighouse'
-    click_button 'Register'
     click_link 'New Game'
     click_link "Let's Play!"
     expect(page).to have_content('You rolled:')
@@ -37,12 +30,6 @@ feature 'User can play one hand of Ten Thousand' do
   scenario 'User can choose dice to keep' do
     srand(1)
     visit '/'
-    click_link 'Register'
-    fill_in 'Username', :with => 'Albert'
-    fill_in 'Email', :with => 'albert@example.com'
-    fill_in 'Password', :with => 'thebighouse'
-    fill_in 'Password confirmation', :with => 'thebighouse'
-    click_button 'Register'
     click_link 'New Game'
     click_link "Let's Play!"
     expect(page).to have_content('You rolled: ⚀ ⚁ ⚃ ⚃ ⚄ ⚅')
@@ -55,12 +42,6 @@ feature 'User can play one hand of Ten Thousand' do
   scenario 'User can stop rolling and take score' do
     srand(1)
     visit '/'
-    click_link 'Register'
-    fill_in 'Username', :with => 'Albert'
-    fill_in 'Email', :with => 'albert@example.com'
-    fill_in 'Password', :with => 'thebighouse'
-    fill_in 'Password confirmation', :with => 'thebighouse'
-    click_button 'Register'
     click_link 'New Game'
     click_link "Let's Play!"
     expect(page).to have_content('You rolled: ⚀ ⚁ ⚃ ⚃ ⚄ ⚅')
@@ -73,12 +54,6 @@ feature 'User can play one hand of Ten Thousand' do
   scenario 'If user busts, current score=0, available dice=6, user can play again' do
     srand(3)
     visit '/'
-    click_link 'Register'
-    fill_in 'Username', :with => 'Albert'
-    fill_in 'Email', :with => 'albert@example.com'
-    fill_in 'Password', :with => 'thebighouse'
-    fill_in 'Password confirmation', :with => 'thebighouse'
-    click_button 'Register'
     click_link 'New Game'
     click_link "Let's Play!"
     expect(page).to have_content('You rolled: ⚀ ⚀ ⚀ ⚁ ⚂ ⚃')
