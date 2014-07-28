@@ -1,5 +1,25 @@
 class Game < ActiveRecord::Base
   serialize :last_roll, Array
+  has_many :players
+
+  def initialize(params)
+    player_1_name = params.delete("player_1")
+    player_2_name = params.delete("player_2")
+
+    super(params)
+    self.players.new(player_name: player_1_name, total_score: 0, current_score: 0)
+    self.players.new(player_name: player_2_name, total_score: 0, current_score: 0)
+    self.available_dice = 6
+    # do our logic here?
+  end
+
+  def current_player
+    if new_record?
+      self.players.first
+    else
+      self.players.order(:id).first
+    end
+  end
 
   def new_with_defaults
     self.total_score = 0

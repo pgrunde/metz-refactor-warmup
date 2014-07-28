@@ -1,7 +1,33 @@
 require 'spec_helper'
 
-feature 'User can play one hand of Ten Thousand' do
+feature 'Users can play Ten Thousand' do
 
+  scenario 'Users play' do
+    create_user
+    login_user
+    visit '/'
+    click_link 'New Game'
+    fill_in 'Player 1', :with => 'Albert'
+    fill_in 'Player 2', :with => 'Eddie'
+    click_on "Let's Play!"
+
+    within('.total_scores') do
+      expect(page).to have_content("Albert's Total Score: 0")
+      expect(page).to have_content("Eddie's Total Score: 0")
+    end
+    expect(page).to have_content('Albert, you are up!')
+
+    within('.current') do
+      expect(page).to have_content('Current Score: 0')
+      expect(page).to have_content('Available Dice: 6')
+    end
+
+    # click_on "Roll"
+    # expect(page).to have_content('some dice or something')
+  end
+
+
+=begin
   before do
     srand(3)
     create_user
@@ -55,5 +81,6 @@ feature 'User can play one hand of Ten Thousand' do
     expect(page).to_not have_button('Roll')
     expect(page).to_not have_button('Stay')
   end
+=end
 
 end

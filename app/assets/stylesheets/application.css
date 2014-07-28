@@ -79,9 +79,12 @@ a:hover {
     color: darkred;
 }
 
-.flex_container {
-    display: inline-flex;
+.game_container {
+    display: inline;
+}
 
+.total_scores p {
+    margin: 0
 }
 
 div li {
@@ -96,4 +99,13 @@ div li {
 
 .even {
     background-color: rgba(242, 232, 223, 0.3);
+}
+
+.total_scores {
+    display: inline-block;
+    float: left;
+}
+
+.current {
+    display: inline-block;
 }

@@ -11,6 +11,14 @@
     <li class="even">Dice are scored at the time they are rolled, so three or more of a kind, straights and three pairs must be rolled simultaneously.</li>
     <li class="odd">Instructions adapted from <a href="http://en.wikipedia.org/wiki/Dice_10000">Wikipedia</a></li>
 </ul>
-
 </div>
-<%= link_to 'Let\'s Play!', '/games', :method => :post %>
+<div>
+  <h3>Select your game:</h3>
+  <%= form_for :players, url: games_path do |f| %>
+    <%= f.label :player_1 %>
+    <%= f.text_field :player_1 %>
+    <%= f.label :player_2 %>
+    <%= f.text_field :player_2 %>
+    <%= f.submit "Let's Play!" %>
+  <% end %>
+</div>
