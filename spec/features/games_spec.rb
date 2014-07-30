@@ -15,12 +15,12 @@ feature 'Users can play Ten Thousand' do
     visit '/'
     click_link 'New Game'
     fill_in 'Player 1', :with => 'Albert'
-    fill_in 'Player 2', :with => 'Eddie'
+    fill_in 'Player 2', :with => 'Emily'
     click_on "Let's Play!"
 
     within('.total_scores') do
       expect(page).to have_content("Albert's Total Score: 0")
-      expect(page).to have_content("Eddie's Total Score: 0")
+      expect(page).to have_content("Emily's Total Score: 0")
     end
     expect(page).to have_content('Albert, you are up!')
 
@@ -40,6 +40,8 @@ feature 'Users can play Ten Thousand' do
     click_on 'Stay'
     expect(page).to have_content('Current Score: 0')
     expect(page).to have_content('Albert\'s Total Score: 350')
+    expect(page).to have_content('Emily, you are up!')
+    expect(page).to_not have_content('You rolled:')
   end
 
 

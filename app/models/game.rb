@@ -10,6 +10,7 @@ class Game < ActiveRecord::Base
     self.players.new(player_name: player_1_name, total_score: 0, current_score: 0)
     self.players.new(player_name: player_2_name, total_score: 0, current_score: 0)
     self.available_dice = 6
+    self.player_iterator = 0
     # do our logic here?
   end
 
@@ -17,7 +18,7 @@ class Game < ActiveRecord::Base
     if new_record?
       self.players.first
     else
-      self.players.order(:id).first
+      self.players.order(:id)[self.player_iterator]
     end
   end
 
@@ -47,6 +48,8 @@ class Game < ActiveRecord::Base
     player.total_score += player.current_score
     player.current_score = 0
     player.save
+    self.player_iterator += 1
+    self.last_roll = []
     self.available_dice = 0
     self.save
   end
