@@ -31,10 +31,10 @@ class Game < ActiveRecord::Base
 
   def roll_again(scoring_dice)
     player = current_player
-    self.available_dice -= scoring_dice.length
-    self.available_dice = 6 if self.available_dice == 0
     player.current_score += score(scoring_dice)
     player.save
+    self.available_dice -= scoring_dice.length
+    self.available_dice = 6 if self.available_dice == 0
     self.last_roll = roll_dice
     self.save
   end
@@ -46,8 +46,8 @@ class Game < ActiveRecord::Base
     player.current_score += score(scoring_dice)
     player.total_score += player.current_score
     player.current_score = 0
-    self.available_dice = 0
     player.save
+    self.available_dice = 0
     self.save
   end
 
