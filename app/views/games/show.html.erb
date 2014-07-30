@@ -11,10 +11,6 @@
 
     <p>Current Score: <%= @game.current_player.current_score %></p>
 
-    <p>Available Dice: <%= @game.available_dice %></p>
-  </div>
-
-  <div class="game">
     <% if !@game.last_roll.empty? %>
       <%= form_for @game do |f| %>
         <div class="dice_desc">You rolled:</div>

@@ -26,7 +26,6 @@ feature 'Users can play Ten Thousand' do
 
     within('.current') do
       expect(page).to have_content('Current Score: 0')
-      expect(page).to have_content('Available Dice: 6')
     end
 
     click_on "Roll"
@@ -36,12 +35,10 @@ feature 'Users can play Ten Thousand' do
     click_on "Roll"
     expect(page).to have_content('⚀ ⚀ ⚁ ⚅')
     expect(page).to have_content('Current Score: 150')
-    expect(page).to have_content('Available Dice: 4')
     check 'dice_0'
     check 'dice_1'
     click_on 'Stay'
     expect(page).to have_content('Current Score: 0')
-    expect(page).to have_content('Available Dice: 0')
     expect(page).to have_content('Albert\'s Total Score: 350')
   end
 
