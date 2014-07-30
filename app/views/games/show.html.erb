@@ -1,7 +1,7 @@
 <div class="game_container">
 
   <div class="total_scores">
-    <% @game.players.each do |player| %>
+    <% @game.players.order(:id).each do |player| %>
       <p><%= player.player_name %>'s Total Score: <%= player.total_score %></p>
     <% end %>
   </div>
