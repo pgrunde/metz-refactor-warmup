@@ -22,14 +22,6 @@ class Game < ActiveRecord::Base
     end
   end
 
-  def new_with_defaults
-    self.total_score = 0
-    self.current_score = 0
-    self.available_dice = 6
-    self.last_roll = roll_dice
-    self.save
-  end
-
   def roll_again(scoring_dice)
     self.available_dice -= scoring_dice.length
     self.available_dice = 6 if self.available_dice == 0
