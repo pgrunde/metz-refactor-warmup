@@ -8,7 +8,27 @@
 
   <div class="current">
     <p><%= @game.current_player.player_name %>, you are up!</p>
+
     <p>Current Score: <%= @game.current_player.current_score %></p>
+
     <p>Available Dice: <%= @game.available_dice %></p>
+  </div>
+
+  <div class="game">
+    <% if !@game.last_roll.empty? %>
+      <%= form_for @game do |f| %>
+        <div class="dice_desc">You rolled:</div>
+        <% @game.last_roll.each_with_index do |die, i| %>
+          <input id="dice_<%= i %>" name="dice_<%= i %>" type="checkbox" value="<%= die[0] %>"/>
+          <label for="dice_<%= i %>"><%= die[1] %></label>
+        <% end %>
+        <%= f.submit 'Roll' %>
+        <%= f.submit 'Stay' %>
+      <% end %>
+    <% else %>
+      <%= form_for @game do |f| %>
+        <%= f.submit 'Roll' %>
+      <% end %>
+    <% end %>
   </div>
 </div>

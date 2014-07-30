@@ -2,6 +2,13 @@ require 'spec_helper'
 
 feature 'Users can play Ten Thousand' do
 
+  before do
+    srand(1)
+  end
+  after do
+    srand(Random.new_seed)
+  end
+
   scenario 'Users play' do
     create_user
     login_user
@@ -22,8 +29,20 @@ feature 'Users can play Ten Thousand' do
       expect(page).to have_content('Available Dice: 6')
     end
 
-    # click_on "Roll"
-    # expect(page).to have_content('some dice or something')
+    click_on "Roll"
+    expect(page).to have_content('⚀ ⚁ ⚃ ⚃ ⚄ ⚅')
+    check 'dice_0'
+    check 'dice_4'
+    click_on "Roll"
+    expect(page).to have_content('⚀ ⚀ ⚁ ⚅')
+    expect(page).to have_content('Current Score: 150')
+    expect(page).to have_content('Available Dice: 4')
+    check 'dice_0'
+    check 'dice_1'
+    click_on 'Stay'
+    expect(page).to have_content('Current Score: 0')
+    expect(page).to have_content('Available Dice: 0')
+    expect(page).to have_content('Albert\'s Total Score: 350')
   end
 
 
