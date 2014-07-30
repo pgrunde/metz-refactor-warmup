@@ -12,6 +12,11 @@ class GamesController < ApplicationController
 
   def show
     @game = Game.find(params[:id])
+    if @game.last_roll != [] && @game.score(@game.last_roll.map { |die| "#{die[0]}" }) == 0
+      @bust = true
+      @game.bust
+      @game.save!
+    end
     # if @game.score(@game.last_roll.map { |die| "#{die[0]}" }) == 0
     #   @bust = true
     #   @game.current_score = 0
@@ -31,9 +36,8 @@ class GamesController < ApplicationController
       @game.roll_again(scoring_dice)
     elsif params[:commit] == 'Stay'
       @game.stay(scoring_dice)
-    elsif params[:commit] == 'New play'
-      @game.roll_again(@game.last_roll.map { |die| "#{die[0]}" })
-      @game.current_score = 0
+    elsif params[:commit] == 'Awww, man!'
+      @game.stay(scoring_dice)
       @game.save
     end
     redirect_to game_path

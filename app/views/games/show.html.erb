@@ -18,8 +18,14 @@
           <input id="dice_<%= i %>" name="dice_<%= i %>" type="checkbox" value="<%= die[0] %>"/>
           <label for="dice_<%= i %>"><%= die[1] %></label>
         <% end %>
-        <%= f.submit 'Roll' %>
-        <%= f.submit 'Stay' %>
+        <% if @bust %>
+          <%= form_for @game do |f| %>
+            <%= f.submit 'Awww, man!' %>
+          <% end %>
+        <% else %>
+          <%= f.submit 'Roll' %>
+          <%= f.submit 'Stay' %>
+        <% end %>
       <% end %>
     <% else %>
       <%= form_for @game do |f| %>

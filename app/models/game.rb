@@ -32,6 +32,12 @@ class Game < ActiveRecord::Base
     player.save
   end
 
+  def bust
+    player = current_player
+    player.current_score = 0
+    player.save
+  end
+
   def stay(scoring_dice)
     player = current_player
     self.player_iterator += 1
