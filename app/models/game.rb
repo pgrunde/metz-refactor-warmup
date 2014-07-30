@@ -49,6 +49,7 @@ class Game < ActiveRecord::Base
     player.current_score = 0
     player.save
     self.player_iterator += 1
+    self.player_iterator = 0 if self.player_iterator >= self.players.length
     self.last_roll = []
     self.available_dice = 0
     self.save

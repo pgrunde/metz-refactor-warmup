@@ -42,6 +42,14 @@ feature 'Users can play Ten Thousand' do
     expect(page).to have_content('Albert\'s Total Score: 350')
     expect(page).to have_content('Emily, you are up!')
     expect(page).to_not have_content('You rolled:')
+    click_on 'Roll'
+    expect(page).to have_content('⚁ ⚂ ⚄ ⚄ ⚄ ⚅')
+    check 'dice_2'
+    check 'dice_3'
+    check 'dice_4'
+    click_on 'Stay'
+    expect(page).to have_content('Emily\'s Total Score: 500')
+    expect(page).to have_content('Albert, you are up!')
   end
 
 
