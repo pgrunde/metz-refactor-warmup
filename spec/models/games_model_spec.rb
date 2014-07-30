@@ -146,4 +146,16 @@ describe 'User can play Ten Thousand' do
     srand(Random.new_seed)
   end
 
+  it 'allows a user to score for two three-of-a-kind' do
+    srand(281)
+    players = {"player_1" => "Albert", "player_2" => "Eddie"}
+    game = Game.new(players)
+    game.roll_again([])
+    game.stay(['1', '1', '1', '5', '5', '5'])
+    actual = game.players.order(:id)[0].total_score
+    expected = 1500
+    expect(actual).to eq(expected)
+    srand(Random.new_seed)
+  end
+
 end

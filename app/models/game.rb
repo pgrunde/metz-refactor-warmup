@@ -61,6 +61,9 @@ class Game < ActiveRecord::Base
   def score(scoring_dice)
     straight = scoring_dice == ['1', '2', '3', '4', '5', '6']
 
+    two_three_of_a_kind = (scoring_dice[0..2] && scoring_dice[0..2].length == 3 && scoring_dice[1..2].all? { |scoring_die| scoring_die == scoring_dice[0] }) &&
+      (scoring_dice[3..5] && scoring_dice[3..5].length == 3 && scoring_dice[4..5].all? { |scoring_die| scoring_die == scoring_dice[3] })
+
     three_pairs = scoring_dice[0] == scoring_dice[1] &&
       scoring_dice[2] == scoring_dice[3] &&
       scoring_dice[4] == scoring_dice[5] &&
@@ -103,6 +106,15 @@ class Game < ActiveRecord::Base
       if kind == '1' || kind == '5'
         scoring_dice.delete(kind)
       end
+    elsif two_three_of_a_kind
+      kind_0 = scoring_dice[0]
+      kind_1 = scoring_dice[3]
+      if kind_0 == '1'
+        tally_score = 1000 + kind_1.to_i * 100
+      else
+        tally_score = kind_0.to_i * 100 + kind_1.to_i * 100
+      end
+      scoring_dice.clear
     elsif five_of_a_kind
       kind = scoring_dice.find { |dice| scoring_dice.count(dice) == 5 }
       if kind == '1'
