@@ -17,11 +17,6 @@ class GamesController < ApplicationController
       @game.bust
       @game.save!
     end
-    # if @game.score(@game.last_roll.map { |die| "#{die[0]}" }) == 0
-    #   @bust = true
-    #   @game.current_score = 0
-    #   @game.available_dice = 6
-    # end
   end
 
   def update
