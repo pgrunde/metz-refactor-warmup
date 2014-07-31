@@ -23,12 +23,13 @@ class Game < ActiveRecord::Base
   end
 
   def roll_again(scoring_dice)
+    player = current_player
     self.available_dice -= scoring_dice.length
+    self.save
+    player.current_score += score(scoring_dice)
     self.available_dice = 6 if self.available_dice == 0
     self.last_roll = roll_dice
     self.save
-    player = current_player
-    player.current_score += score(scoring_dice)
     player.save
   end
 
@@ -109,9 +110,7 @@ class Game < ActiveRecord::Base
       else
         tally_score = kind.to_i * 100 * 2 * 2 * 2
       end
-      if kind == '1' || kind == '5'
         scoring_dice.delete(kind)
-      end
     elsif two_three_of_a_kind
       kind_0 = scoring_dice[0]
       kind_1 = scoring_dice[3]
@@ -128,9 +127,7 @@ class Game < ActiveRecord::Base
       else
         tally_score = kind.to_i * 100 * 2 * 2
       end
-      if kind == '1' || kind == '5'
         scoring_dice.delete(kind)
-      end
     elsif four_of_a_kind
       kind = scoring_dice.find { |dice| scoring_dice.count(dice) == 4 }
       if kind == '1'
@@ -138,9 +135,7 @@ class Game < ActiveRecord::Base
       else
         tally_score = kind.to_i * 100 * 2
       end
-      if kind == '1' || kind == '5'
         scoring_dice.delete(kind)
-      end
     elsif three_of_a_kind
       kind = scoring_dice.find { |dice| scoring_dice.count(dice) == 3 }
       if kind == '1'
@@ -148,14 +143,17 @@ class Game < ActiveRecord::Base
       else
         tally_score = kind.first.to_i * 100
       end
-      if kind == '1' || kind == '5'
         scoring_dice.delete(kind)
-      end
     end
 
     tally_score += scoring_dice.count('1') * 100 if scoring_dice.count('1') > 0 && scoring_dice.count('1') < 3
+    scoring_dice.delete('1')
     tally_score += scoring_dice.count('5') * 50 if scoring_dice.count('5') > 0 && scoring_dice.count('5') < 3
+    scoring_dice.delete('5')
 
+    rejected_dice = scoring_dice
+
+    self.available_dice += rejected_dice.length
     tally_score
   end
 end

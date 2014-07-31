@@ -65,6 +65,14 @@ feature 'Users can play Ten Thousand' do
     expect(page).to have_content('⚀ ⚁ ⚁ ⚁ ⚄ ⚅')
     click_on 'Roll'
     expect(page).to have_content('⚀ ⚁ ⚁ ⚁ ⚄ ⚅')
+    check 'dice_0'
+    check 'dice_1'
+    check 'dice_2'
+    check 'dice_3'
+    check 'dice_4'
+    check 'dice_5'
+    click_on 'Roll'
+    expect(page).to have_content('⚁')
     srand(Random.new_seed)
   end
 
