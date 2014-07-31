@@ -15,10 +15,15 @@
     <% if !@game.last_roll.empty? %>
       <%= form_for @game do |f| %>
         <div class="dice_desc">You rolled:</div>
+        <div class="game_dice">
         <% @game.last_roll.each_with_index do |die, i| %>
+            <div class="dice">
           <input id="dice_<%= i %>" name="dice_<%= i %>" type="checkbox" value="<%= die[0] %>"/>
           <label for="dice_<%= i %>"><%= die[1] %></label>
+            </div>
         <% end %>
+        </div>
+        <div class="game_buttons">
         <% if @bust %>
           <%= form_for @game do |f| %>
             <input style="display: none" id="first_roll" name="first_roll" type="checkbox" value="first_roll" checked/>
@@ -34,6 +39,7 @@
         <input style="display: none" id="first_roll" name="first_roll" type="checkbox" value="first_roll" checked/>
         <%= f.submit 'Roll' %>
       <% end %>
+      </div>
     <% end %>
   </div>
 </div>
