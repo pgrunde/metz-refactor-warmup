@@ -13,8 +13,8 @@ feature 'Users can play Ten Thousand' do
     click_on "Let's Play!"
 
     within('.total_scores') do
-      expect(page).to have_content("Albert's Total Score: 0")
-      expect(page).to have_content("Emily's Total Score: 0")
+      expect(page).to have_content('Albert - 0')
+      expect(page).to have_content('Emily - 0')
     end
     expect(page).to have_content('Albert, you are up!')
 
@@ -33,7 +33,7 @@ feature 'Users can play Ten Thousand' do
     check 'dice_1'
     click_on 'Stay'
     expect(page).to have_content('Current Score: 0')
-    expect(page).to have_content('Albert\'s Total Score: 350')
+    expect(page).to have_content('Albert - 350')
     expect(page).to have_content('Emily, you are up!')
     expect(page).to_not have_content('You rolled:')
     click_on 'Roll'
@@ -45,7 +45,7 @@ feature 'Users can play Ten Thousand' do
     expect(page).to have_content('⚂ ⚄ ⚅')
     check 'dice_1'
     click_on 'Stay'
-    expect(page).to have_content('Emily\'s Total Score: 550')
+    expect(page).to have_content('Emily - 550')
     expect(page).to have_content('Albert, you are up!')
     click_on 'Roll'
     expect(page).to have_content('⚂ ⚂ ⚃ ⚄ ⚄ ⚅')
@@ -59,7 +59,7 @@ feature 'Users can play Ten Thousand' do
     expect(page).to have_content('⚁ ⚅')
     expect(page).to have_content('Current Score: 0')
     click_on('Awww, man!')
-    expect(page).to have_content('Albert\'s Total Score: 350')
+    expect(page).to have_content('Albert - 350')
     expect(page).to have_content('Emily, you are up!')
     click_on 'Roll'
     expect(page).to have_content('⚀ ⚁ ⚁ ⚁ ⚄ ⚅')
