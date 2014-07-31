@@ -24,7 +24,7 @@ feature 'Users can play Ten Thousand' do
     end
     expect(page).to have_content('Albert, you are up!')
 
-    within('.current') do
+    within('.current_game') do
       expect(page).to have_content('Current Score: 0')
     end
 
