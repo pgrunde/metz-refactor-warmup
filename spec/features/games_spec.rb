@@ -2,14 +2,8 @@ require 'spec_helper'
 
 feature 'Users can play Ten Thousand' do
 
-  before do
-    srand(1)
-  end
-  after do
-    srand(Random.new_seed)
-  end
-
   scenario 'Users play' do
+    srand(1)
     create_user
     login_user
     visit '/'
@@ -71,63 +65,7 @@ feature 'Users can play Ten Thousand' do
     expect(page).to have_content('⚀ ⚁ ⚁ ⚁ ⚄ ⚅')
     click_on 'Roll'
     expect(page).to have_content('⚀ ⚁ ⚁ ⚁ ⚄ ⚅')
-  end
-
-
-=begin
-  before do
-    srand(3)
-    create_user
-    login_user
-    visit '/'
-    click_link 'New Game'
-    click_link "Let's Play!"
-  end
-
-  after do
     srand(Random.new_seed)
   end
-
-  scenario 'New game has defaults of total and current score 0, available dice 6' do
-    expect(page).to have_content('Total Score: 0')
-    expect(page).to have_content('Current Score: 0')
-    expect(page).to have_content('Available Dice: 6')
-  end
-
-  scenario 'User can choose dice to keep' do
-    expect(page).to have_content('You rolled: ⚀ ⚀ ⚀ ⚁ ⚂ ⚃')
-    check 'dice_0'
-    check 'dice_1'
-    check 'dice_2'
-    click_button 'Roll'
-    expect(page).to have_content('Current Score: 1000')
-  end
-
-  scenario 'User can stop rolling and take score' do
-    expect(page).to have_content('You rolled: ⚀ ⚀ ⚀ ⚁ ⚂ ⚃')
-    check 'dice_0'
-    check 'dice_1'
-    check 'dice_2'
-    click_button 'Stay'
-    expect(page).to have_content('Total Score: 1000')
-  end
-
-  scenario 'If user busts, current score=0, available dice=6, user can play again' do
-    expect(page).to have_content('You rolled: ⚀ ⚀ ⚀ ⚁ ⚂ ⚃')
-    check 'dice_0'
-    check 'dice_1'
-    check 'dice_2'
-    click_button 'Roll'
-    expect(page).to have_content('Current Score: 1000')
-    expect(page).to have_content('Available Dice: 3')
-    check 'dice_0'
-    click_button 'Roll'
-    expect(page).to have_content('Current Score: 0')
-    expect(page).to have_content('Available Dice: 6')
-    expect(page).to have_content('Bust!')
-    expect(page).to_not have_button('Roll')
-    expect(page).to_not have_button('Stay')
-  end
-=end
 
 end
