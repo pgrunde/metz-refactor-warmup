@@ -20,6 +20,7 @@
         <% end %>
         <% if @bust %>
           <%= form_for @game do |f| %>
+            <input style="display: none" id="first_roll" name="first_roll" type="checkbox" value="first_roll" checked/>
             <%= f.submit 'Awww, man!' %>
           <% end %>
         <% else %>
@@ -29,6 +30,7 @@
       <% end %>
     <% else %>
       <%= form_for @game do |f| %>
+        <input style="display: none" id="first_roll" name="first_roll" type="checkbox" value="first_roll" checked/>
         <%= f.submit 'Roll' %>
       <% end %>
     <% end %>

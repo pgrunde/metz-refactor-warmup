@@ -32,13 +32,15 @@ class GamesController < ApplicationController
                     params[:dice_3],
                     params[:dice_4],
                     params[:dice_5],].compact
-    if params[:commit] == 'Roll'
-      @game.roll_again(scoring_dice)
-    elsif params[:commit] == 'Stay'
-      @game.stay(scoring_dice)
-    elsif params[:commit] == 'Awww, man!'
-      @game.stay(scoring_dice)
-      @game.save
+    if params[:first_roll] || scoring_dice.length >0
+      if params[:commit] == 'Roll'
+        @game.roll_again(scoring_dice)
+      elsif params[:commit] == 'Stay'
+        @game.stay(scoring_dice)
+      elsif params[:commit] == 'Awww, man!'
+        @game.stay(scoring_dice)
+        @game.save
+      end
     end
     redirect_to game_path
   end
