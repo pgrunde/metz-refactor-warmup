@@ -73,6 +73,7 @@ feature 'Users can play Ten Thousand' do
     check 'dice_5'
     click_on 'Roll'
     expect(page).to have_content('⚁')
+    expect(page).to_not have_unchecked_field('⚁')
     srand(Random.new_seed)
   end
 
