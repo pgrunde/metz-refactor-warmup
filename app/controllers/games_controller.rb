@@ -30,14 +30,17 @@ class GamesController < ApplicationController
     if params[:first_roll] || scoring_dice.length >0
       if params[:commit] == 'Roll'
         @game.roll_again(scoring_dice)
-      elsif params[:commit] == 'Stay'
+      elsif turn_finished?
         @game.stay(scoring_dice)
-      elsif params[:commit] == 'Awww, man!'
-        @game.stay(scoring_dice)
-        @game.save
       end
     end
     redirect_to game_path
+  end
+
+  private
+
+  def turn_finished?
+    params[:commit] == 'Stay' || params[:commit] == 'Awww, man!'
   end
 
 end
