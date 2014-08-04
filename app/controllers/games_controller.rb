@@ -27,7 +27,7 @@ class GamesController < ApplicationController
                     params[:dice_3],
                     params[:dice_4],
                     params[:dice_5],].compact
-    if params[:first_roll] || scoring_dice.length >0
+    if params[:first_roll]  || params[:busted] || scoring_dice.length >0
       if params[:commit] == 'Roll'
         @game.roll_again(scoring_dice)
       elsif turn_finished?
