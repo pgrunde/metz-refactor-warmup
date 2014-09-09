@@ -18,7 +18,7 @@ Break one thing at a time. Make a small change and run the specs. Commit often.
 
 ## Extra
 
-Find a bug based on your refactoring and write a spec covering your fix. Use the code organization techniques you know to isolate specific sections of logic to either separate classes, modules or concerns.
+1. There are two bugs pending in the game spec. Un-pend and fix the bugs.
 
 ***
 
