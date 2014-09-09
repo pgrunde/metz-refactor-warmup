@@ -1,6 +1,9 @@
 # Metz Refactor Warmup (Apply)
 
-The goal for this warmup is to practice refactoring using Sandi Metz Rules. Use these rules to refactor this class to the best of your ability. Use the specs to ensure functionality is still working, you may need to rewrite them in accordance with your code changes. 
+The goal for this warmup is to practice refactoring using Sandi Metz Rules. Use these rules to refactor this class to the best of your ability. Use the specs to ensure functionality is still working, you may need to rewrite them in accordance with your code changes. This is a full working Rails app written by @craftninja, so the app should still be working after the refactor.
+
+## Refactoring the Game Model
+There is a [model](https://github.com/gSchool/metz-refactor-warmup/blob/master/app/models/game.rb), and there is a corresponding [spec](https://github.com/gSchool/metz-refactor-warmup/blob/master/spec/models/games_model_spec.rb).
 
 ## Sandi Metz Rules
 
@@ -9,13 +12,13 @@ The goal for this warmup is to practice refactoring using Sandi Metz Rules. Use 
 3. You can pass no more than four parameters and you can't just make it one big hash.
 4. When a call comes into your Rails controller, you can only instantiate one object to do whatever it is that needs to be done.
 
-## Code to work on
-
-The code you will be refactoring is here: [class](https://github.com/gSchool/metz-refactor-warmup/blob/master/app/models/game.rb), and there is a corresponding [spec](https://github.com/gSchool/metz-refactor-warmup/blob/master/spec/models/games_model_spec.rb).
-
 ## Tips
 
 Break one thing at a time. Make a small change and run the specs. Commit often.
+
+## Extra
+
+Find a bug based on your refactoring and write a spec covering your fix. Use the code organization techniques you know to isolate specific sections of logic to either separate classes, modules or concerns.
 
 ***
 
