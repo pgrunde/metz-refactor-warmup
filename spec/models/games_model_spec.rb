@@ -158,4 +158,30 @@ describe 'User can play Ten Thousand' do
     srand(Random.new_seed)
   end
 
+  it 'allows a user to score for five 1s' do
+    pending
+    srand(7099)
+    players = {"player_1" => "Albert", "player_2" => "Eddie"}
+    game = Game.new(players)
+    game.roll_again([])
+    game.stay(['1', '1', '1', '1', '1'])
+    actual = game.players.order(:id)[0].total_score
+    expected = 4000
+    expect(actual).to eq(expected)
+    srand(Random.new_seed)
+  end
+
+  it 'allows a user to score for six 1s' do
+    pending
+    srand(1472)
+    players = {"player_1" => "Albert", "player_2" => "Eddie"}
+    game = Game.new(players)
+    game.roll_again([])
+    game.stay(['1', '1', '1', '1', '1', '1'])
+    actual = game.players.order(:id)[0].total_score
+    expected = 8000
+    expect(actual).to eq(expected)
+    srand(Random.new_seed)
+  end
+
 end
