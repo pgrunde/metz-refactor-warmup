@@ -1,4 +1,9 @@
-# README
+# Metz Refactor Warmup (Apply)
+
+The goal for this warmup is to practice refactoring using Sandi Metz Rules
+
+
+## Application README
 
 ### Hi there! This is a personal project I have been working on. I hope you like it!
 
