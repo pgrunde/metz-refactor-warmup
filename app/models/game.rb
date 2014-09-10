@@ -92,7 +92,6 @@ class Game < ActiveRecord::Base
     end
 
     tallyin(scoring_dice)
-    tallyon(scoring_dice)
     rejected_dice = scoring_dice
     self.available_dice += rejected_dice.length
     @tally_score

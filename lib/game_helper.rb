@@ -36,9 +36,6 @@ end
 def tallyin(scoring_dice)
   @tally_score += scoring_dice.count('1') * 100 if scoring_dice.count('1') > 0 && scoring_dice.count('1') < 3
   scoring_dice.delete('1')
-end
-
-def tallyon(scoring_dice)
   @tally_score += scoring_dice.count('5') * 50 if scoring_dice.count('5') > 0 && scoring_dice.count('5') < 3
   scoring_dice.delete('5')
 end
