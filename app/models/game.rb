@@ -44,11 +44,7 @@ class Game < ActiveRecord::Base
 
   def stay(scoring_dice)
     player = current_player
-    self.player_iterator += 1
-    self.player_iterator = 0 if self.player_iterator >= self.players.length
-    self.last_roll = []
-    self.available_dice = 0
-    self.save
+    stay_self
     player.total_score ||= 0
     player.current_score ||=0
     player.current_score += score(scoring_dice)

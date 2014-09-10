@@ -71,3 +71,11 @@ def three_of_a_kind_method(scoring_dice)
   kind == '1' ? @tally_score = 1000 : @tally_score = kind.first.to_i * 100
   scoring_dice.delete(kind)
 end
+
+def stay_self
+  self.player_iterator += 1
+  self.player_iterator = 0 if self.player_iterator >= self.players.length
+  self.last_roll = []
+  self.available_dice = 0
+  self.save
+end
