@@ -1,3 +1,5 @@
+require_relative '../../lib/game_helper'
+
 class Game < ActiveRecord::Base
   serialize :last_roll, Array
   has_many :players
@@ -69,14 +71,9 @@ class Game < ActiveRecord::Base
   def score(scoring_dice)
     straight = scoring_dice == ['1', '2', '3', '4', '5', '6']
 
-    two_three_of_a_kind = (scoring_dice[0..2] && scoring_dice[0..2].length == 3 && scoring_dice[1..2].all? { |scoring_die| scoring_die == scoring_dice[0] }) &&
-      (scoring_dice[3..5] && scoring_dice[3..5].length == 3 && scoring_dice[4..5].all? { |scoring_die| scoring_die == scoring_dice[3] })
+    two_three_of_a_kind = two_three_of_a_kind_method(scoring_dice)
 
-    three_pairs = scoring_dice[0] == scoring_dice[1] &&
-      scoring_dice[2] == scoring_dice[3] &&
-      scoring_dice[4] == scoring_dice[5] &&
-      scoring_dice.length == 6 &&
-      !scoring_dice.all? { |scoring_die| scoring_dice[0] == scoring_die }
+    three_pairs = three_pairs_method(scoring_dice)
 
     three_of_a_kind =
       (scoring_dice[0..2] && scoring_dice[0..2].length == 3 && scoring_dice[1..2].all? { |scoring_die| scoring_die == scoring_dice[0] }) ||
