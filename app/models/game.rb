@@ -90,6 +90,7 @@ class Game < ActiveRecord::Base
     elsif three_of_a_kind(scoring_dice)
       three_of_a_kind_method(scoring_dice)
     end
+
     tallyin(scoring_dice)
     tallyon(scoring_dice)
     rejected_dice = scoring_dice

@@ -45,53 +45,32 @@ end
 
 def six_of_a_kind_method(scoring_dice)
   kind = scoring_dice.find { |dice| scoring_dice.count(dice) == 6 }
-  if kind == '1'
-    @tally_score = 1000 * 4
-  else
-    @tally_score = kind.to_i * 100 * 2 * 2 * 2
-  end
+  kind == '1' ? @tally_score = 1000 * 4 : @tally_score = kind.to_i * 100 * 2 * 2 * 2
   scoring_dice.delete(kind)
 end
 
 def two_three_of_a_kind_method(scoring_dice)
   kind_0 = scoring_dice[0]
   kind_1 = scoring_dice[3]
-  if kind_0 == '1'
-    @tally_score = 1000 + kind_1.to_i * 100
-  else
-    @tally_score = kind_0.to_i * 100 + kind_1.to_i * 100
-  end
+  kind_0 == '1' ? @tally_score = 1000 + kind_1.to_i * 100 : @tally_score = kind_0.to_i * 100 + kind_1.to_i * 100
   scoring_dice.clear
 end
 
 def five_of_a_kind_method(scoring_dice)
   kind = scoring_dice.find { |dice| scoring_dice.count(dice) == 5 }
-  if kind == '1'
-    @tally_score = 1000 * 3
-  else
-    @tally_score = kind.to_i * 100 * 2 * 2
-  end
+  kind == '1' ? @tally_score = 1000 * 3 : @tally_score = kind.to_i * 100 * 2 * 2
   scoring_dice.delete(kind)
 end
 
 
 def four_of_a_kind_method(scoring_dice)
-kind = scoring_dice.find { |dice| scoring_dice.count(dice) == 4 }
-if kind == '1'
-  @tally_score = 1000 * 2
-else
-  @tally_score = kind.to_i * 100 * 2
-end
-scoring_dice.delete(kind)
-
+  kind = scoring_dice.find { |dice| scoring_dice.count(dice) == 4 }
+  kind == '1' ? @tally_score = 1000 * 2 : @tally_score = kind.to_i * 100 * 2
+  scoring_dice.delete(kind)
 end
 
 def three_of_a_kind_method(scoring_dice)
-kind = scoring_dice.find { |dice| scoring_dice.count(dice) == 3 }
-if kind == '1'
-  @tally_score = 1000
-else
-  @tally_score = kind.first.to_i * 100
-end
-scoring_dice.delete(kind)
+  kind = scoring_dice.find { |dice| scoring_dice.count(dice) == 3 }
+  kind == '1' ? @tally_score = 1000 : @tally_score = kind.first.to_i * 100
+  scoring_dice.delete(kind)
 end
