@@ -71,65 +71,29 @@ class Game < ActiveRecord::Base
   def score(scoring_dice)
     straight = scoring_dice == ['1', '2', '3', '4', '5', '6']
 
-    tally_score = 0
+    @tally_score = 0
 
     if straight
-      tally_score = 1500
+      @tally_score = 1500
       scoring_dice.clear
     elsif three_pairs(scoring_dice)
-      tally_score = 750
+      @tally_score = 750
       scoring_dice.clear
     elsif six_of_a_kind(scoring_dice)
-      kind = scoring_dice.find { |dice| scoring_dice.count(dice) == 6 }
-      if kind == '1'
-        tally_score = 1000 * 4
-      else
-        tally_score = kind.to_i * 100 * 2 * 2 * 2
-      end
-        scoring_dice.delete(kind)
+      six_of_a_kind_method(scoring_dice)
     elsif two_three_of_a_kind(scoring_dice)
-      kind_0 = scoring_dice[0]
-      kind_1 = scoring_dice[3]
-      if kind_0 == '1'
-        tally_score = 1000 + kind_1.to_i * 100
-      else
-        tally_score = kind_0.to_i * 100 + kind_1.to_i * 100
-      end
-      scoring_dice.clear
+      two_three_of_a_kind_method(scoring_dice)
     elsif five_of_a_kind(scoring_dice)
-      kind = scoring_dice.find { |dice| scoring_dice.count(dice) == 5 }
-      if kind == '1'
-        tally_score = 1000 * 3
-      else
-        tally_score = kind.to_i * 100 * 2 * 2
-      end
-        scoring_dice.delete(kind)
+      five_of_a_kind_method(scoring_dice)
     elsif four_of_a_kind(scoring_dice)
-      kind = scoring_dice.find { |dice| scoring_dice.count(dice) == 4 }
-      if kind == '1'
-        tally_score = 1000 * 2
-      else
-        tally_score = kind.to_i * 100 * 2
-      end
-        scoring_dice.delete(kind)
+      four_of_a_kind_method(scoring_dice)
     elsif three_of_a_kind(scoring_dice)
-      kind = scoring_dice.find { |dice| scoring_dice.count(dice) == 3 }
-      if kind == '1'
-        tally_score = 1000
-      else
-        tally_score = kind.first.to_i * 100
-      end
-        scoring_dice.delete(kind)
+      three_of_a_kind_method(scoring_dice)
     end
-
-    tally_score += scoring_dice.count('1') * 100 if scoring_dice.count('1') > 0 && scoring_dice.count('1') < 3
-    scoring_dice.delete('1')
-    tally_score += scoring_dice.count('5') * 50 if scoring_dice.count('5') > 0 && scoring_dice.count('5') < 3
-    scoring_dice.delete('5')
-
+    tallyin(scoring_dice)
+    tallyon(scoring_dice)
     rejected_dice = scoring_dice
-
     self.available_dice += rejected_dice.length
-    tally_score
+    @tally_score
   end
 end
