@@ -71,33 +71,15 @@ class Game < ActiveRecord::Base
   def score(scoring_dice)
     straight = scoring_dice == ['1', '2', '3', '4', '5', '6']
 
-    two_three_of_a_kind = two_three_of_a_kind_method(scoring_dice)
-
-    three_pairs = three_pairs_method(scoring_dice)
-
-    three_of_a_kind = three_of_a_kind_method(scoring_dice)
-
-    four_of_a_kind =
-      (scoring_dice[0..3] && scoring_dice[0..3].length == 4 && scoring_dice[1..3].all? { |scoring_die| scoring_die == scoring_dice[0] }) ||
-        (scoring_dice[1..4] && scoring_dice[1..4].length == 4 && scoring_dice[2..4].all? { |scoring_die| scoring_die == scoring_dice[1] }) ||
-        (scoring_dice[2..5] && scoring_dice[2..5].length == 4 && scoring_dice[3..5].all? { |scoring_die| scoring_die == scoring_dice[2] })
-
-    five_of_a_kind =
-      (scoring_dice[0..4] && scoring_dice[0..4].length == 5 && scoring_dice[1..4].all? { |scoring_die| scoring_die == scoring_dice[0] }) ||
-        (scoring_dice[1..5] && scoring_dice[1..5].length == 5 && scoring_dice[2..5].all? { |scoring_die| scoring_die == scoring_dice[1] })
-
-    six_of_a_kind =
-      scoring_dice.length == 6 && scoring_dice[1..5].all? { |scoring_die| scoring_die == scoring_dice[0] }
-
     tally_score = 0
 
     if straight
       tally_score = 1500
       scoring_dice.clear
-    elsif three_pairs
+    elsif three_pairs(scoring_dice)
       tally_score = 750
       scoring_dice.clear
-    elsif six_of_a_kind
+    elsif six_of_a_kind(scoring_dice)
       kind = scoring_dice.find { |dice| scoring_dice.count(dice) == 6 }
       if kind == '1'
         tally_score = 1000 * 4
@@ -105,7 +87,7 @@ class Game < ActiveRecord::Base
         tally_score = kind.to_i * 100 * 2 * 2 * 2
       end
         scoring_dice.delete(kind)
-    elsif two_three_of_a_kind
+    elsif two_three_of_a_kind(scoring_dice)
       kind_0 = scoring_dice[0]
       kind_1 = scoring_dice[3]
       if kind_0 == '1'
@@ -114,7 +96,7 @@ class Game < ActiveRecord::Base
         tally_score = kind_0.to_i * 100 + kind_1.to_i * 100
       end
       scoring_dice.clear
-    elsif five_of_a_kind
+    elsif five_of_a_kind(scoring_dice)
       kind = scoring_dice.find { |dice| scoring_dice.count(dice) == 5 }
       if kind == '1'
         tally_score = 1000 * 3
@@ -122,7 +104,7 @@ class Game < ActiveRecord::Base
         tally_score = kind.to_i * 100 * 2 * 2
       end
         scoring_dice.delete(kind)
-    elsif four_of_a_kind
+    elsif four_of_a_kind(scoring_dice)
       kind = scoring_dice.find { |dice| scoring_dice.count(dice) == 4 }
       if kind == '1'
         tally_score = 1000 * 2
@@ -130,7 +112,7 @@ class Game < ActiveRecord::Base
         tally_score = kind.to_i * 100 * 2
       end
         scoring_dice.delete(kind)
-    elsif three_of_a_kind
+    elsif three_of_a_kind(scoring_dice)
       kind = scoring_dice.find { |dice| scoring_dice.count(dice) == 3 }
       if kind == '1'
         tally_score = 1000
